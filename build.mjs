@@ -165,6 +165,7 @@ async function build() {
       description: t.notFound.body,
       body: pages.notFound(lang, t),
       jsonLd: [],
+      noindex: true,
     });
     await writeFile(join(dist, lang === 'ar' ? 'ar' : '', '404.html'), nf, 'utf8');
   }

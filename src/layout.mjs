@@ -204,7 +204,7 @@ export const floatCta = (lang, t) => `
 
 /* ------------------------------------------------------------------ shell */
 
-export function document({ lang, t, id, title, description, canonical, body, jsonLd = [] }) {
+export function document({ lang, t, id, title, description, canonical, body, jsonLd = [], noindex = false }) {
   const prefix = lang === 'ar' ? '../' : '';
   const siteUrl = `https://${site.domain}`;
   const pathFor = (language) => {
@@ -220,7 +220,7 @@ export function document({ lang, t, id, title, description, canonical, body, jso
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${canonicalUrl}">
+${noindex ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical" href="${canonicalUrl}">
 <link rel="alternate" hreflang="en-AE" href="${pathFor('en')}">
 <link rel="alternate" hreflang="ar-AE" href="${pathFor('ar')}">
 <link rel="alternate" hreflang="x-default" href="${pathFor('en')}">
