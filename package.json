@@ -8,7 +8,8 @@
     "build": "node build.mjs",
     "serve": "node tools/serve.mjs",
     "audit": "node tools/audit.mjs",
-    "crawl": "node tools/crawl.mjs"
+    "crawl": "node tools/crawl.mjs",
+    "verify": "node tools/verify-deploy.mjs"
   },
   "engines": {
     "node": ">=18"

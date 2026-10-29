@@ -30,6 +30,7 @@ rewrite rule (`/about` → `about.html`).
 ```bash
 node tools/audit.mjs    # copy, links, alt text, heading order, metadata
 node tools/crawl.mjs    # every page returns 200, no broken local reference
+node tools/verify-deploy.mjs  # canonicals, hreflang, sitemap, JSON configs
 ```
 
 Both must print a clean result before publishing.
