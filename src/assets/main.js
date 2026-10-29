@@ -46,6 +46,50 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  /* -------------------------------------------------------------- page fade */
+  const veil = document.querySelector('.page-veil');
+
+  if (veil) {
+    let leaveTimer = 0;
+
+    document.addEventListener('click', (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const link = event.target.closest('a');
+      if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+      if (link.origin !== location.origin) return;
+
+      const url = new URL(link.href);
+      const samePage = url.pathname === location.pathname && url.search === location.search;
+
+      // In-page anchors keep their instant scroll behaviour.
+      if (samePage && url.hash) return;
+
+      root.classList.remove('is-entering');
+      root.classList.add('is-leaving');
+      window.clearTimeout(leaveTimer);
+      // If the navigation never happens, bring the page back.
+      leaveTimer = window.setTimeout(() => root.classList.remove('is-leaving'), 1400);
+    });
+
+    // Back/forward restore: drop any veil state left behind.
+    window.addEventListener('pageshow', (event) => {
+      if (!event.persisted) return;
+      window.clearTimeout(leaveTimer);
+      root.classList.remove('is-leaving');
+      root.classList.remove('is-entering');
+    });
+  }
+
   /* ------------------------------------------------------------------ form */
   const form = document.getElementById('quote-form');
 

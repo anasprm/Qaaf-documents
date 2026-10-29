@@ -220,8 +220,7 @@ export function document({ lang, t, id, title, description, canonical, body, jso
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-${noindex ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical" href="${canonicalUrl}">
-<link rel="alternate" hreflang="en-AE" href="${pathFor('en')}">
+${noindex ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical" href="${canonicalUrl}"><link rel="alternate" hreflang="en-AE" href="${pathFor('en')}">
 <link rel="alternate" hreflang="ar-AE" href="${pathFor('ar')}">
 <link rel="alternate" hreflang="x-default" href="${pathFor('en')}">
 <meta name="theme-color" content="#C8102E">
@@ -240,6 +239,18 @@ ${noindex ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  (function () {
+    var root = document.documentElement;
+    root.classList.add('js');
+    try {
+      if (!document.referrer) return;
+      if (new URL(document.referrer).origin !== location.origin) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      root.classList.add('is-entering');
+    } catch (error) {}
+  })();
+</script>
 <link rel="stylesheet" href="${prefix}assets/styles.css">
 ${jsonLd.map((obj) => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`).join('\n')}
 </head>
@@ -250,6 +261,7 @@ ${body}
 </main>
 ${footer(lang, t)}
 ${floatCta(lang, t)}
+<div class="page-veil" aria-hidden="true"></div>
 <script src="${prefix}assets/main.js" defer></script>
 </body>
 </html>`;

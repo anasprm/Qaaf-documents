@@ -62,28 +62,43 @@ html {
   scroll-padding-top: 96px;
 }
 
-/* ------------------------------------------------------------------ page transitions & animations */
-/* Cross-document view transitions: graceful no-op in browsers without support. */
-@view-transition {
-  navigation: auto;
+/* ------------------------------------------------------------------ page fade */
+/* A same-origin arrival starts under a white veil that lifts in ~0.3s.
+   No navigation is delayed: the class is set in <head> before first paint. */
+.page-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--white);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.16s cubic-bezier(0.4, 0, 1, 1);
 }
 
-::view-transition-old(root) {
-  animation: pageFadeOut 0.16s var(--ease-out) both;
+html.is-entering .page-veil {
+  opacity: 1;
+  animation: pageVeil 0.32s cubic-bezier(0.22, 1, 0.36, 1) 20ms both;
 }
 
-::view-transition-new(root) {
-  animation: pageFadeIn 0.26s var(--ease-out) both;
+html.is-leaving .page-veil {
+  opacity: 1;
 }
 
-@keyframes pageFadeOut {
+@keyframes pageVeil {
   from { opacity: 1; }
   to { opacity: 0; }
 }
 
-@keyframes pageFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .page-veil {
+    display: none;
+  }
+}
+
+@media print {
+  .page-veil {
+    display: none;
+  }
 }
 
 body {
