@@ -1,0 +1,78 @@
+# Qaaf Documents Clearing Services — website
+
+Bilingual (English / Arabic, RTL) static site for Qaaf Documents Clearing Services,
+Shop M10, Al Habtoor Building, Abu Hail Street, Hor Al Anz East, Deira, Dubai.
+
+- 8 pages × 2 languages + 2 not-found pages
+- Zero dependencies, no database, no build framework
+- Every form and checklist opens a pre-filled WhatsApp message — no backend needed
+
+## Build
+
+```bash
+node build.mjs          # or: npm run build
+```
+
+Writes the complete site to `dist/`. The folder is self-contained: upload it anywhere.
+
+## Preview locally
+
+```bash
+node tools/serve.mjs    # or: npm run serve
+# http://127.0.0.1:4173
+```
+
+`PORT=8080 node tools/serve.mjs` changes the port. The dev server mirrors the Apache
+rewrite rule (`/about` → `about.html`).
+
+## Quality checks
+
+```bash
+node tools/audit.mjs    # copy, links, alt text, heading order, metadata
+node tools/crawl.mjs    # every page returns 200, no broken local reference
+```
+
+Both must print a clean result before publishing.
+
+## Deploy to Vercel (recommended)
+
+1. Push this folder to GitHub (or run `vercel` in this directory).
+2. In Vercel, **Import Project** → framework preset **Other**.
+3. Build command `node build.mjs`, output directory `dist` (already set in `vercel.json`).
+4. Deploy, then add the domain in **Settings → Domains** and point the DNS records
+   Vercel shows (apex `A 76.76.21.21`, `www` CNAME `cname.vercel-dns.com`).
+5. Set the primary domain to `qaafdxb.ae` (no `www`) so it matches the canonical tags.
+
+`vercel.json` at the project root configures the build, asset caching, redirects and
+security headers. `dist/vercel.json` carries the same hosting rules so the folder can
+also be dragged into Vercel on its own.
+
+## Deploy to Hostinger / Apache
+
+Upload the **contents of `dist/`** into `public_html/`. `dist/.htaccess` already forces
+HTTPS, drops `www`, enables compression/caching and routes unknown URLs to `404.html`.
+
+## Editing content
+
+| What | Where |
+| --- | --- |
+| Phone, WhatsApp, address, geodata, domain | `src/content.mjs` → `site` |
+| English copy | `src/content.mjs` → `const en` |
+| Arabic copy | `src/content.mjs` → `const ar` |
+| Page structure / sections | `src/pages.mjs` |
+| Header, footer, head tags, schema | `src/layout.mjs` |
+| Design, motion, breakpoints | `src/assets/styles.css` |
+| Interactions (nav, forms, checklist, open status) | `src/assets/main.js` |
+| Hosting rules | `build.mjs` → `HTACCESS`, `VERCEL`, `MANIFEST` |
+
+Rebuild after any change.
+
+## Confirm with the owner before launch
+
+- Opening hours (site says Sat–Thu 9:00–19:00, Fri 9:00–19:00, Sunday closed;
+  2GIS lists daily 9:00–21:00).
+- Same-day service claim.
+- Email `info@qaafdxb.ae` (the mailbox must exist on the domain).
+- Languages spoken (Arabic, English, Hindi, Urdu).
+- Office address line and Google Maps pin.
+- Licence number 1529320 (DET) is displayed in the footer.

@@ -1,4 +1,4 @@
-// Static site generator — no dependencies.
+// Static site generator - no dependencies.
 //   node build.mjs     -> writes dist/
 import { mkdir, writeFile, rm, copyFile, readdir, stat } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
@@ -45,8 +45,11 @@ const FAQ = {
 };
 
 const siteUrl = `https://${site.domain}`;
-const pageUrl = (id, lang) =>
-  `${siteUrl}${lang === 'ar' ? '/ar/' : '/'}${fileFor(id)}`.replace(/index\.html$/, '');
+const pagePath = (id, lang) => {
+  const path = `${lang === 'ar' ? '/ar/' : '/'}${fileFor(id)}`.replace(/index\.html$/, '');
+  return path === '/' ? '/' : path.replace(/\/$/, '');
+};
+const pageUrl = (id, lang) => `${siteUrl}${pagePath(id, lang)}`;
 
 /* ------------------------------------------------------------- structured */
 
@@ -217,7 +220,7 @@ ${urls.join('\n')}
 
 /* --------------------------------------------------------------- hosting */
 
-const HTACCESS = `# Qaaf Documents Clearing Services — Apache / Hostinger
+const HTACCESS = `# Qaaf Documents Clearing Services - Apache / Hostinger
 Options -MultiViews
 AddDefaultCharset UTF-8
 ErrorDocument 404 /404.html
@@ -265,18 +268,27 @@ ErrorDocument 404 /404.html
 
 const VERCEL = JSON.stringify(
   {
-    cleanUrls: true,
     trailingSlash: false,
+    redirects: [
+      { source: '/index.html', destination: '/', permanent: true },
+      { source: '/ar/index.html', destination: '/ar', permanent: true },
+    ],
     headers: [
       {
         source: '/assets/(.*)',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
       {
+        source: '/(.*).html',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' }],
+      },
+      {
         source: '/(.*)',
         headers: [
           { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'geolocation=(), microphone=(), camera=()' },
         ],
       },
     ],
@@ -290,10 +302,14 @@ const MANIFEST = JSON.stringify(
     name: 'Qaaf Documents Clearing Services',
     short_name: 'Qaaf',
     start_url: '/',
+    scope: '/',
     display: 'standalone',
     background_color: '#FFFFFF',
     theme_color: '#C8102E',
-    icons: [{ src: '/assets/favicon.svg', sizes: 'any', type: 'image/svg+xml' }],
+    icons: [
+      { src: '/assets/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+      { src: '/assets/logo-mark.png', sizes: 'any', type: 'image/png' },
+    ],
   },
   null,
   2,
@@ -446,3 +462,4 @@ function ogImage() {
 }
 
 await build();
+

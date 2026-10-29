@@ -272,12 +272,25 @@
     if (elements.length) {
       const observer = new IntersectionObserver(
         (entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
+          // Items that arrive in the same batch are staggered so a grid
+          // resolves like a wave instead of appearing all at once.
+          const batch = new Map();
+
+          entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+            .forEach((entry) => {
+              const parent = entry.target.parentElement;
+              const n = batch.get(parent) || 0;
+              batch.set(parent, n + 1);
+
+              if (n > 0) {
+                entry.target.style.setProperty('--reveal-delay', `${Math.min(n, 5) * 60}ms`);
+              }
+
               entry.target.classList.add('is-revealed');
               obs.unobserve(entry.target);
-            }
-          });
+            });
         },
         {
           rootMargin: '0px 0px -40px 0px',

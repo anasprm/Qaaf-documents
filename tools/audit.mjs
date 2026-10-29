@@ -75,8 +75,12 @@ for (const file of html) {
   for (const ref of refs) {
     const clean = ref.split('#')[0].split('?')[0];
     if (!clean) continue;
-    const target = resolve(dirname(file), clean);
-    if (!(await exists(target))) add(`broken reference ${ref}`);
+    const base = resolve(dirname(file), clean.endsWith('/') ? `${clean}index.html` : clean);
+    const ok =
+      (await exists(base)) ||
+      (await exists(`${base}.html`)) ||
+      (await exists(join(base, 'index.html')));
+    if (!ok) add(`broken reference ${ref}`);
   }
 
   // json-ld

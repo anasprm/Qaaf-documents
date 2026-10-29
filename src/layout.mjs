@@ -25,10 +25,10 @@ export const fileFor = (id) => (id === 'index' ? 'index.html' : `${id}.html`);
 
 /** Link to a page in a given language, relative to the current page's folder. */
 export function href(id, lang, currentLang) {
-  const file = fileFor(id);
-  if (lang === currentLang) return file;
-  if (lang === 'ar') return `ar/${file}`;
-  return `../${file}`;
+  const home = id === 'index';
+  if (lang === currentLang) return home ? './' : fileFor(id);
+  if (lang === 'ar') return home ? 'ar' : `ar/${fileFor(id)}`;
+  return home ? '../' : `../${fileFor(id)}`;
 }
 
 export const asset = (lang, path) => (lang === 'ar' ? `../assets/${path}` : `assets/${path}`);
@@ -78,7 +78,7 @@ const stars = `<span class="stars" aria-hidden="true">${icon('star')}${icon('sta
 /* ------------------------------------------------------------------- logo */
 
 export const logo = (lang, t) => `
-<a class="brand" href="${fileFor('index')}" aria-label="${esc(site.name)}">
+<a class="brand" href="${href('index', lang, lang)}" aria-label="${esc(site.name)}">
   <span class="brand-mark" aria-hidden="true">
     <img src="${asset(lang, 'logo-mark.png')}" alt="" width="46" height="52" decoding="async">
   </span>
@@ -206,11 +206,11 @@ export const floatCta = (lang, t) => `
 
 export function document({ lang, t, id, title, description, canonical, body, jsonLd = [] }) {
   const prefix = lang === 'ar' ? '../' : '';
-  const enPath = lang === 'ar' ? `../${fileFor(id)}` : fileFor(id);
-  const arPath = lang === 'ar' ? fileFor(id) : `ar/${fileFor(id)}`;
   const siteUrl = `https://${site.domain}`;
-  const pathFor = (language) =>
-    `${siteUrl}${language === 'ar' ? '/ar/' : '/'}${fileFor(id)}`.replace(/index\.html$/, '');
+  const pathFor = (language) => {
+    const path = `${language === 'ar' ? '/ar/' : '/'}${fileFor(id)}`.replace(/index\.html$/, '');
+    return `${siteUrl}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
+  };
   const canonicalUrl = pathFor(lang);
 
   return `<!DOCTYPE html>

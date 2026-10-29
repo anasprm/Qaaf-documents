@@ -2,14 +2,21 @@
   "name": "Qaaf Documents Clearing Services",
   "short_name": "Qaaf",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#C8102E",
   "icons": [
     {
-      "src": "/assets/favicon.svg",
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/logo-mark.png",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/png"
     }
   ]
 }

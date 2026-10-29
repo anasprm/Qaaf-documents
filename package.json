@@ -1,0 +1,16 @@
+{
+  "name": "qaaf-documents",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bilingual (EN/AR) website for Qaaf Documents Clearing Services, Deira, Dubai.",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node tools/serve.mjs",
+    "audit": "node tools/audit.mjs",
+    "crawl": "node tools/crawl.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
