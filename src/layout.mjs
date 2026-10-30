@@ -236,9 +236,11 @@ ${noindex ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical
 <meta name="twitter:description" content="${esc(description)}">
 <link rel="icon" href="${prefix}assets/icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="${prefix}assets/icon-512.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+${lang === 'ar'
+  ? `<link rel="preload" href="${prefix}assets/fonts/plex-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${prefix}assets/fonts/plex-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>`
+  : `<link rel="preload" href="${prefix}assets/fonts/jakarta-latin-400-800.woff2" as="font" type="font/woff2" crossorigin>`}
+<link rel="stylesheet" href="${prefix}assets/fonts-${lang}.css">
 <script>
   (function () {
     var root = document.documentElement;

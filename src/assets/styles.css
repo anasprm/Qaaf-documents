@@ -72,12 +72,12 @@ html {
   background: var(--white);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.16s cubic-bezier(0.4, 0, 1, 1);
+  transition: opacity 0.14s cubic-bezier(0.4, 0, 1, 1);
 }
 
 html.is-entering .page-veil {
   opacity: 1;
-  animation: pageVeil 0.32s cubic-bezier(0.22, 1, 0.36, 1) 20ms both;
+  animation: pageVeil 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 html.is-leaving .page-veil {
@@ -616,9 +616,6 @@ h3 {
   transform: translateY(-1px);
 }
 
-[dir="rtl"] .lang-switch {
-  font-family: var(--font);
-}
 
 .nav-toggle {
   display: none;

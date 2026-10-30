@@ -1,6 +1,6 @@
 // Static site generator - no dependencies.
 //   node build.mjs     -> writes dist/
-import { mkdir, writeFile, rm, copyFile, readdir, stat } from 'node:fs/promises';
+import { mkdir, writeFile, rm, cp } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { deflateSync } from 'node:zlib';
@@ -170,13 +170,8 @@ async function build() {
     await writeFile(join(dist, lang === 'ar' ? 'ar' : '', '404.html'), nf, 'utf8');
   }
 
-  // assets
-  for (const file of await readdir(join(src, 'assets'))) {
-    const s = await stat(join(src, 'assets', file));
-    if (s.isFile() && !file.startsWith('.')) {
-      await copyFile(join(src, 'assets', file), join(dist, 'assets', file));
-    }
-  }
+  // assets (including the self-hosted fonts folder)
+  await cp(join(src, 'assets'), join(dist, 'assets'), { recursive: true });
   await writeFile(join(dist, 'assets', 'og-image.png'), ogImage());
 
   // sitemap

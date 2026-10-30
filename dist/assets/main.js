@@ -52,6 +52,11 @@
   if (veil) {
     let leaveTimer = 0;
 
+    // Safety net: never let the veil outlive its animation (throttled tabs, etc.).
+    const dropEntering = () => root.classList.remove('is-entering');
+    veil.addEventListener('animationend', dropEntering);
+    window.setTimeout(dropEntering, 600);
+
     document.addEventListener('click', (event) => {
       if (
         event.defaultPrevented ||
@@ -88,6 +93,33 @@
       root.classList.remove('is-leaving');
       root.classList.remove('is-entering');
     });
+
+    /* Prefetch internal pages on hover/focus so the click feels instant. */
+    const connection = navigator.connection || {};
+    const cheap = !connection.saveData && !/2g/.test(connection.effectiveType || '');
+    const prefetched = new Set();
+
+    const prefetch = (link) => {
+      if (!cheap || !link || link.origin !== location.origin) return;
+      if (link.target === '_blank' || link.hasAttribute('download')) return;
+
+      const url = new URL(link.href);
+      if (url.pathname === location.pathname && url.search === location.search) return;
+
+      if (prefetched.has(url.href)) return;
+      prefetched.add(url.href);
+
+      const tag = document.createElement('link');
+      tag.rel = 'prefetch';
+      tag.as = 'document';
+      tag.href = url.href;
+      document.head.appendChild(tag);
+    };
+
+    document.addEventListener('mouseover', (event) => prefetch(event.target.closest('a')), {
+      passive: true,
+    });
+    document.addEventListener('focusin', (event) => prefetch(event.target.closest('a')));
   }
 
   /* ------------------------------------------------------------------ form */
