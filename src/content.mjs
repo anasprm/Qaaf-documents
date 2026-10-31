@@ -28,6 +28,8 @@ export const site = {
   established: '2025',
   googleSiteVerification: '39Ibl896NN3AfOH2',
   googleVerification: '39Ibl896NN3AfOH2',
+  google_verification: '39Ibl896NN3AfOH2',
+  verification: '39Ibl896NN3AfOH2',
 };
 
 // WhatsApp deep link with a pre-filled message per language
