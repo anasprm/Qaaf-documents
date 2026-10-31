@@ -295,7 +295,7 @@ export const posterGallery = (lang, t) => `
 
     <div class="poster-grid">
       ${POSTERS.map((file, i) => `
-        <figure class="poster-item reveal-on-scroll" style="--reveal-delay: ${Math.min(i, 10) * 40}ms">
+        <figure class="poster-item" style="--reveal-delay: ${Math.min(i, 10) * 40}ms">
           <img src="${asset(lang, `posters/${file}`)}" alt="${lang === 'ar' ? 'ملحق خدمة قاف' : 'Qaaf Service Notice'} ${i + 1}" loading="lazy" width="400" height="560">
         </figure>`).join('')}
     </div>

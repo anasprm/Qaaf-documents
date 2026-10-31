@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://qaafdxb.ae/sitemap.xml
+Sitemap: https://qaafdocuments.vercel.app/sitemap.xml
