@@ -26,6 +26,7 @@ export const site = {
   geo: { lat: 25.285869, lng: 55.328174 },
   domain: 'qaafdxb.ae',
   established: '2025',
+  googleVerification: 'REPLACE_WITH_YOUR_GSC_VERIFICATION_CODE',
 };
 
 // WhatsApp deep link with a pre-filled message per language
