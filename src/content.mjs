@@ -24,12 +24,13 @@ export const site = {
   mapEmbed:
     'https://www.google.com/maps?q=25.285869,55.328174&z=17&output=embed',
   geo: { lat: 25.285869, lng: 55.328174 },
-  domain: 'qaafdxb.ae',
+  domain: 'qaafdocuments.vercel.app',
   established: '2025',
   googleSiteVerification: '39Ibl896NN3AfOH2',
   googleVerification: '39Ibl896NN3AfOH2',
   google_verification: '39Ibl896NN3AfOH2',
   verification: '39Ibl896NN3AfOH2',
+  
 };
 
 // WhatsApp deep link with a pre-filled message per language
