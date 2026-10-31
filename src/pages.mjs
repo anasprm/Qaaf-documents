@@ -10,6 +10,7 @@ import {
   reviewCards,
   authoritiesBand,
   breadcrumbs,
+  posterGallery,
 } from './layout.mjs';
 
 const escAttr = (s) =>
@@ -166,6 +167,7 @@ ${authoritiesBand(t)}
 </section>
 
 ${reviewCards(t)}
+${posterGallery(lang, t)}
 ${visitBlock(t, lang)}
 ${faqBlock(t, t.home.faq)}
 ${ctaBand(t, lang)}

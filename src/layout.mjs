@@ -278,6 +278,30 @@ export const sectionHead = (eyebrow, title, lede = '') => `
   ${lede ? `<p class="section-lede">${lede}</p>` : ''}
 </div>`;
 
+const POSTERS = [
+  '1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg',
+  'a.jpg','b.jpg','c.jpg','d.jpg','e.jpg','f.jpg','g.jpg','h.jpg','i.jpg',
+  'images.jpg','j.jpg','k.jpg','logo.jpg','v.jpg','x.jpg','z.jpg'
+];
+
+export const posterGallery = (lang, t) => `
+<section class="posters-band" id="posters">
+  <div class="wrap">
+    ${sectionHead('', lang === 'ar' ? 'خدماتنا وإعلانات المكتب' : 'Our Services & Office Notices')}
+    <p class="lede center">${lang === 'ar'
+      ? 'تصفح ملصقات خدماتنا الرسمية والإرشادات الحكومية المتاحة في مكتبنا بهور العنز، ديرة.'
+      : 'Browse our official service posters and government guidance notices available at our Hor Al Anz office.'}</p>
+
+    <div class="poster-grid">
+      ${POSTERS.map((file, i) => `
+        <figure class="poster-item reveal-on-scroll" style="--reveal-delay: ${Math.min(i, 10) * 40}ms">
+          <img src="${asset(lang, `posters/${file}`)}" alt="${lang === 'ar' ? 'ملحق خدمة قاف' : 'Qaaf Service Notice'} ${i + 1}" loading="lazy" width="400" height="560">
+        </figure>`).join('')}
+    </div>
+  </div>
+</section>
+`;
+
 export const ctaBand = (t, lang) => `
 <section class="cta-band">
   <div class="wrap cta-inner">
