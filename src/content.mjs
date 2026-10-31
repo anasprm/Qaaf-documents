@@ -27,6 +27,7 @@ export const site = {
   domain: 'qaafdxb.ae',
   established: '2025',
   googleSiteVerification: '39Ibl896NN3AfOH2',
+  googleVerification: '39Ibl896NN3AfOH2',
 };
 
 // WhatsApp deep link with a pre-filled message per language
