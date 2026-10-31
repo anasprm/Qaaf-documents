@@ -173,6 +173,9 @@ async function build() {
   // assets (including the self-hosted fonts folder)
   await cp(join(src, 'assets'), join(dist, 'assets'), { recursive: true });
   await writeFile(join(dist, 'assets', 'og-image.png'), ogImage());
+  
+  // Copy Google Search Console verification file
+  await cp(join(src, 'googledcae9b5bb9138e43.html'), join(dist, 'googledcae9b5bb9138e43.html'));
 
   // sitemap
   const urls = [];
