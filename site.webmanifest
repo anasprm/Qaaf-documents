@@ -1,0 +1,35 @@
+{
+  "name": "Qaaf Documents",
+  "short_name": "Qaaf Docs",
+  "description": "Authorized typing centre and document clearing services in Dubai, UAE. Emirates ID, Visa, Legal Translation, MOFA Attestation, Tasheel, Ejari & more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a3d6b",
+  "theme_color": "#0a3d6b",
+  "lang": "en-AE",
+  "orientation": "portrait-primary",
+  "categories": ["business", "government", "productivity"],
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshot-wide.jpg",
+      "sizes": "1280x800",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Qaaf Documents Homepage — Typing Centre Dubai"
+    }
+  ]
+}

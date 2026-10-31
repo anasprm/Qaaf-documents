@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ====================================================
+       QAAF DOCUMENTS — XML Sitemap
+       Submit to: https://search.google.com/search-console
+       ==================================================== -->
+
+  <!-- HOMEPAGE -->
+  <url>
+    <loc>https://www.qaafdocuments.ae/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en-ae" href="https://www.qaafdocuments.ae/"/>
+    <xhtml:link rel="alternate" hreflang="ar-ae" href="https://www.qaafdocuments.ae/ar/"/>
+    <image:image>
+      <image:loc>https://www.qaafdocuments.ae/assets/og-image.jpg</image:loc>
+      <image:title>Qaaf Documents — Typing Centre Dubai, UAE</image:title>
+    </image:image>
+  </url>
+
+  <!-- SERVICES PAGES -->
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/emirates-id-typing-dubai/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/residence-visa-typing-dubai/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/golden-visa-document-processing-uae/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/family-visa-typing-dubai/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/visa-medical-typing-dubai/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/legal-translation-dubai/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/mofa-attestation-uae/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/degree-certificate-attestation-uae/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/ded-trade-license-renewal-dubai/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/tasheel-mohre-labour-services-dubai/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/ejari-registration-dubai/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.qaafdocuments.ae/services/power-of-attorney-drafting-dubai/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- CONTACT PAGE -->
+  <url>
+    <loc>https://www.qaafdocuments.ae/contact/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- ARABIC ALTERNATE PAGES -->
+  <url>
+    <loc>https://www.qaafdocuments.ae/ar/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- LEGAL PAGES -->
+  <url>
+    <loc>https://www.qaafdocuments.ae/privacy-policy/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

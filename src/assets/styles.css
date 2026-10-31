@@ -3466,6 +3466,50 @@ body.nav-open {
   }
 }
 
+/* ------------------------------------------------- poster gallery styles */
+.posters-band {
+  padding-block: clamp(48px, 8vw, 80px);
+  background: var(--tint);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.poster-item {
+  position: relative;
+  aspect-ratio: 5 / 7;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-medium) var(--ease-out),
+              box-shadow var(--duration-medium) var(--ease-out);
+}
+
+.poster-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .poster-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    z-index: 1;
+  }
+
+  .poster-item:hover img {
+    transform: scale(1.05);
+  }
+}
+
 [data-copy].is-copied {
   background: var(--red-050) !important;
   border-color: var(--red) !important;

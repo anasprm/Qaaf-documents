@@ -1,0 +1,31 @@
+# ================================================================
+# QAAF DOCUMENTS — robots.txt
+# Optimized for Google Search Console
+# ================================================================
+
+# Allow all major search engine crawlers
+User-agent: *
+Allow: /
+
+# Block non-essential directories (if they exist)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /*.json$
+Disallow: /cgi-bin/
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /assets/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 5
+
+# Sitemap location — CRITICAL for Google Search Console
+Sitemap: https://www.qaafdocuments.ae/sitemap.xml
