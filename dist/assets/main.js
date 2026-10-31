@@ -330,7 +330,6 @@
       '.step',
       '.why-list li',
       '.review-card',
-      '.poster-item',
       '.ticket',
       '.stat',
       '.authority',
