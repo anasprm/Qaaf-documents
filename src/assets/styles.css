@@ -3466,26 +3466,34 @@ body.nav-open {
   }
 }
 
-/* ------------------------------------------------- poster gallery styles */
+/* ------------------------------------------------- poster gallery styles (Instagram grid style) */
 .posters-band {
   padding-block: clamp(48px, 8vw, 80px);
-  background: var(--tint);
+  background: var(--surface);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
 .poster-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
   margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .poster-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
 }
 
 .poster-item {
   position: relative;
-  aspect-ratio: 5 / 7;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
-  border-radius: var(--radius);
+  background: var(--tint);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
   transition: transform var(--duration-medium) var(--ease-out),
               box-shadow var(--duration-medium) var(--ease-out);
@@ -3495,18 +3503,19 @@ body.nav-open {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--duration-slow) var(--ease-out);
+  transition: transform var(--duration-slow) var(--ease-out), filter var(--duration-medium) var(--ease-out);
 }
 
 @media (hover: hover) {
   .poster-item:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-md);
     z-index: 1;
   }
 
   .poster-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.04);
+    filter: brightness(1.02);
   }
 }
 
