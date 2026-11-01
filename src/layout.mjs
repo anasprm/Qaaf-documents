@@ -71,6 +71,8 @@ const ICONS = {
   copy: '<path d="M8 2h9a2 2 0 0 1 2 2v11h-2V4H8V2Zm-3 4h9a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm0 2v12h9V8H5Z"/>',
   instagram:
     '<path d="M8 2h8a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H8a6 6 0 0 1-6-6V8a6 6 0 0 1 6-6Zm0 1.8A4.2 4.2 0 0 0 3.8 8v8A4.2 4.2 0 0 0 8 20.2h8a4.2 4.2 0 0 0 4.2-4.2V8A4.2 4.2 0 0 0 16 3.8H8Zm4 3.2a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.4-3.3a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/>',
+  grid:
+    '<path d="M3 3h5v5H3V3Zm7 0h5v5h-5V3Zm7 0h5v5h-5V3ZM3 10h5v5H3v-5Zm7 0h5v5h-5v-5Zm7 0h5v5h-5v-5ZM3 17h5v5H3v-5Zm7 0h5v5h-5v-5Zm7 0h5v5h-5v-5Z"/>',
 };
 
 export const icon = (name, cls = 'ico') =>
@@ -282,31 +284,32 @@ export const sectionHead = (eyebrow, title, lede = '') => `
 </div>`;
 
 const POSTERS = [
-  '1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg',
-  'a.jpg','b.jpg','c.jpg','d.jpg','e.jpg','f.jpg','g.jpg','h.jpg','i.jpg',
-  'images.jpg','j.jpg','k.jpg','logo.jpg','v.jpg','x.jpg','z.jpg'
+  '1.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '8.jpg', '9.jpg',
+  'b.jpg', 'c.jpg', 'e.jpg', 'f.jpg', 'g.jpg', 'h.jpg', 'i.jpg',
+  'images.jpg', 'j.jpg', 'v.jpg',
 ];
 
 export const posterGallery = (lang, t) => `
 <section class="posters-band instagram-gallery" id="posters">
   <div class="wrap">
     <div class="instagram-profile">
-      <img class="instagram-avatar" src="${asset(lang, 'logo-mark.png')}" alt="" width="76" height="76" loading="lazy">
-      <div class="instagram-profile-copy">
-        <div class="instagram-profile-heading">
-          <div>
-            <p class="instagram-handle">@qaafdocumentsclearing</p>
-            <h2>${lang === 'ar' ? site.nameAr : site.name}</h2>
-          </div>
-          <a class="btn btn-ghost btn-sm" href="${site.instagram}" target="_blank" rel="noopener">${t.ui.viewInstagram}${icon('instagram', 'ico ico-sm')}</a>
-        </div>
-        <p class="instagram-bio">${lang === 'ar'
+      <img class="instagram-avatar" src="${asset(lang, 'logo-mark.png')}" alt="" width="150" height="150" loading="lazy">
+      <div class="instagram-profile-heading">
+        <p class="instagram-handle">@qaafdocumentsclearing</p>
+        <a class="btn btn-ghost btn-sm" href="${site.instagram}" target="_blank" rel="noopener">${t.ui.viewInstagram}${icon('instagram', 'ico ico-sm')}</a>
+      </div>
+      <p class="instagram-post-count"><strong>${POSTERS.length}</strong> ${t.ui.posts}</p>
+      <div class="instagram-profile-bio">
+        <h2>${lang === 'ar' ? site.nameAr : site.name}</h2>
+        <p>${lang === 'ar'
           ? 'تحديثات الخدمات ومعلومات المكتب من قاف لتخليص المعاملات في هور العنز، ديرة، دبي.'
           : 'Service updates and office information from Qaaf Documents Clearing Services in Hor Al Anz, Deira, Dubai.'}</p>
-        <p class="instagram-post-count"><strong>${POSTERS.length}</strong> ${t.ui.posts}</p>
       </div>
     </div>
-    <div class="instagram-grid" aria-label="${lang === 'ar' ? 'منشورات قاف' : 'Qaaf posts'}">
+    <div class="instagram-tabs">
+      <span class="instagram-tab is-active" aria-current="page">${icon('grid', 'ico ico-sm')}<span>${t.ui.posts}</span></span>
+    </div>
+    <div class="instagram-grid" role="group" aria-label="${lang === 'ar' ? 'منشورات قاف' : 'Qaaf posts'}">
       ${POSTERS.map((file, i) => `
         <button class="instagram-post" type="button" data-post-open data-index="${i + 1}"
           data-src="${asset(lang, `posters/${file}`)}"

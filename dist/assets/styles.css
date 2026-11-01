@@ -3475,23 +3475,31 @@ body.nav-open {
 
 /* --------------------------------------------------------- social gallery */
 .posters-band {
-  padding-block: clamp(52px, 7vw, 88px);
-  background: #f7f8f8;
+  padding-block: clamp(28px, 4vw, 48px) clamp(52px, 7vw, 88px);
+  background: #fff;
   border-block: 1px solid var(--line);
 }
 
 .instagram-profile {
   display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 2fr;
+  grid-template-areas:
+    "avatar heading"
+    "avatar count"
+    "avatar bio";
   align-items: center;
-  gap: clamp(24px, 5vw, 64px);
-  max-width: 850px;
-  margin: 0 auto clamp(32px, 5vw, 56px);
+  column-gap: clamp(28px, 5vw, 64px);
+  row-gap: 16px;
+  max-width: 935px;
+  margin: 0 auto 28px;
+  padding: 24px 4%;
 }
 
 .instagram-avatar {
-  width: 104px;
-  height: 104px;
+  grid-area: avatar;
+  justify-self: center;
+  width: 150px;
+  height: 150px;
   padding: 14px;
   object-fit: contain;
   background: #fff;
@@ -3499,23 +3507,13 @@ body.nav-open {
   border-radius: 50%;
 }
 
-.instagram-profile-copy {
-  min-width: 0;
-}
-
 .instagram-profile-heading {
+  grid-area: heading;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
   gap: 12px 24px;
-  margin-bottom: 12px;
-}
-
-.instagram-profile-heading h2 {
-  margin: 2px 0 0;
-  font-size: 1.12rem;
-  line-height: 1.35;
+  min-width: 0;
 }
 
 .instagram-profile-heading .btn {
@@ -3525,35 +3523,76 @@ body.nav-open {
 .instagram-handle {
   margin: 0;
   color: var(--ink);
-  font-size: 1.04rem;
-  font-weight: 700;
+  font-size: 1.12rem;
+  font-weight: 500;
 }
 
-.instagram-bio {
-  margin: 0 0 12px;
+.instagram-profile-bio {
+  grid-area: bio;
+  min-width: 0;
+}
+
+.instagram-profile-bio h2 {
+  margin: 0 0 4px;
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
+.instagram-profile-bio p {
   max-width: 58ch;
+  margin: 0;
   color: var(--ink-600);
   font-size: 0.9rem;
 }
 
 .instagram-post-count {
+  grid-area: count;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
   margin: 0;
-  color: var(--muted);
-  font-size: 0.83rem;
+  color: var(--ink);
+  font-size: 0.94rem;
 }
 
 .instagram-post-count strong {
-  color: var(--ink);
+  font-weight: 600;
+}
+
+.instagram-tabs {
+  display: flex;
+  justify-content: center;
+  max-width: 935px;
+  height: 54px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+}
+
+.instagram-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 80px;
+  margin-top: -1px;
+  border-top: 1px solid var(--ink);
+  color: var(--ink-800);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[dir="rtl"] .instagram-tab {
+  letter-spacing: 0;
 }
 
 .instagram-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
-  max-width: 960px;
+  gap: 3px;
+  max-width: 935px;
   margin-inline: auto;
-  border-top: 1px solid var(--line);
-  padding-top: 4px;
 }
 
 .instagram-post {
@@ -3563,7 +3602,7 @@ body.nav-open {
   min-width: 0;
   padding: 0;
   border: 0;
-  aspect-ratio: 1;
+  aspect-ratio: 3 / 4;
   background: #e9ebeb;
   cursor: pointer;
 }
@@ -3676,26 +3715,51 @@ body.nav-open {
 
 @media (max-width: 600px) {
   .instagram-profile {
-    grid-template-columns: 72px minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
+    grid-template-columns: 77px minmax(0, 1fr);
+    grid-template-areas:
+      "heading heading"
+      "avatar count"
+      "bio bio";
+    column-gap: 20px;
+    row-gap: 16px;
+    margin-bottom: 22px;
+    padding: 12px 0 20px;
   }
 
   .instagram-avatar {
-    width: 68px;
-    height: 68px;
-    padding: 9px;
+    width: 77px;
+    height: 77px;
+    padding: 10px;
   }
 
   .instagram-profile-heading {
-    align-items: flex-start;
-    flex-direction: column;
+    justify-content: space-between;
     gap: 8px;
   }
 
   .instagram-profile-heading .btn {
     padding: 0.48em 0.7em;
     font-size: 0.76rem;
+  }
+
+  .instagram-handle {
+    font-size: 1rem;
+  }
+
+  .instagram-profile-bio {
+    padding-inline: 2px;
+  }
+
+  .instagram-profile-bio p {
+    font-size: 0.84rem;
+  }
+
+  .instagram-tabs {
+    height: 46px;
+  }
+
+  .instagram-tab {
+    width: 100%;
   }
 
   .instagram-grid {
