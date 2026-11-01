@@ -174,8 +174,9 @@ async function build() {
   await cp(join(src, 'assets'), join(dist, 'assets'), { recursive: true });
   await writeFile(join(dist, 'assets', 'og-image.png'), ogImage());
   
-  // Copy Google Search Console verification file
+  // Copy Google Search Console verification files
   await cp(join(src, 'googledcae9b5bb9138e43.html'), join(dist, 'googledcae9b5bb9138e43.html'));
+  await cp(join(src, 'google90d7761b632ce735.html'), join(dist, 'google90d7761b632ce735.html'));
 
   // sitemap
   const urls = [];
