@@ -12,6 +12,8 @@
     const setOpen = (open) => {
       body.classList.toggle('nav-open', open);
       toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? toggle.dataset.closeLabel : toggle.dataset.openLabel);
+      if (open) nav.querySelector('a')?.focus({ preventScroll: true });
     };
 
     toggle.addEventListener('click', () => setOpen(!body.classList.contains('nav-open')));
@@ -128,15 +130,32 @@
   if (form) {
     const fields = ['name', 'phone'];
 
+    const errorFor = (field) => {
+      const value = field.value.trim();
+      if (field.name === 'name') return value.length < 2 ? field.dataset.error : '';
+
+      const digits = value
+        .replace(/[٠-٩]/g, (digit) => String(digit.charCodeAt(0) - 0x660))
+        .replace(/[۰-۹]/g, (digit) => String(digit.charCodeAt(0) - 0x6f0))
+        .replace(/\D/g, '');
+      return digits.length < 7 ? field.dataset.error : '';
+    };
+
+    const showError = (field, message) => {
+      const error = form.querySelector(`#${field.getAttribute('aria-describedby')}`);
+      field.setAttribute('aria-invalid', String(Boolean(message)));
+      error.textContent = message;
+      error.hidden = !message;
+    };
+
     const validate = () => {
       let firstInvalid = null;
       fields.forEach((key) => {
         const field = form.elements[key];
         if (!field) return;
-        const value = field.value.trim();
-        const invalid = key === 'phone' ? value.replace(/\D/g, '').length < 7 : value.length < 2;
-        field.setAttribute('aria-invalid', invalid ? 'true' : 'false');
-        if (invalid && !firstInvalid) firstInvalid = field;
+        const message = errorFor(field);
+        showError(field, message);
+        if (message && !firstInvalid) firstInvalid = field;
       });
       return firstInvalid;
     };
@@ -145,7 +164,9 @@
       const field = form.elements[key];
       if (field) {
         field.addEventListener('input', () => {
-          if (field.getAttribute('aria-invalid') === 'true') field.setAttribute('aria-invalid', 'false');
+          if (field.getAttribute('aria-invalid') === 'true') {
+            showError(field, errorFor(field));
+          }
         });
       }
     });
@@ -185,6 +206,67 @@
       const number = form.dataset.wa || '971521113478';
       window.open(`https://wa.me/${number}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     });
+  }
+
+  /* ---------------------------------------------------------- service finder */
+  const serviceSearch = document.getElementById('service-search');
+
+  if (serviceSearch) {
+    const cards = Array.from(document.querySelectorAll('[data-service-card]'));
+    const count = document.querySelector('[data-service-count]');
+    const empty = document.querySelector('[data-service-empty]');
+    const normalise = (text) =>
+      text
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f\u064b-\u065f\u0670]/g, '')
+        .toLocaleLowerCase(root.lang || 'en');
+
+    serviceSearch.addEventListener('input', () => {
+      const query = normalise(serviceSearch.value.trim());
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const matches = !query || normalise(card.textContent).includes(query);
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      });
+
+      count.textContent = `${visible} ${serviceSearch.dataset.countLabel}`;
+      empty.hidden = visible > 0;
+    });
+  }
+
+  /* -------------------------------------------------------------- post view */
+  const postDialog = document.querySelector('.instagram-dialog');
+
+  if (postDialog) {
+    const image = postDialog.querySelector('.instagram-dialog-image');
+    const count = postDialog.querySelector('.instagram-dialog-count');
+    let returnFocus = null;
+
+    document.addEventListener('click', (event) => {
+      const post = event.target.closest('[data-post-open]');
+      if (!post) return;
+
+      returnFocus = post;
+      image.src = post.dataset.src;
+      image.alt = post.dataset.alt;
+      count.textContent = `${post.dataset.index} / ${document.querySelectorAll('[data-post-open]').length}`;
+      postDialog.showModal();
+    });
+
+    postDialog.addEventListener('click', (event) => {
+      if (event.target === postDialog) postDialog.close();
+    });
+
+    postDialog.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        postDialog.close();
+      }
+    });
+
+    postDialog.addEventListener('close', () => returnFocus?.focus());
   }
 
   /* ------------------------------------------------------------ open status */

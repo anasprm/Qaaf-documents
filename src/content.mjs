@@ -86,6 +86,14 @@ const en = {
     copied: 'Address copied',
     askAbout: 'Ask about this',
     checkedCount: 'selected',
+    posts: 'posts',
+    viewPost: 'Open post',
+    closePost: 'Close post',
+    viewInstagram: 'View on Instagram',
+    serviceSearch: 'Find a service',
+    serviceSearchHint: 'Search by service, authority or document',
+    servicesCount: 'services',
+    noServicesFound: 'No matching service. Contact us and we will point you in the right direction.',
     faqLede:
       'If your question is not here, send it on WhatsApp with the document type. You will get the form, the fee and the list of papers in one reply.',
     faqMessage: 'Hello Qaaf, I have a question about my documents.',
@@ -145,7 +153,10 @@ const en = {
       'MOFA attestation',
       'Power of attorney',
     ],
-    heroCardFoot: 'Open Saturday–Thursday, 9:00–19:00 · Friday 9:00–19:00 · Sunday closed',
+    heroCardFoot: 'Open Monday–Saturday, 9:00–19:00 · Sunday closed',
+    officeCardLabel: 'Visit our Deira office',
+    officeCardTitle: 'A local typing centre, with a real address.',
+    officeCardAction: 'Plan your visit',
     ticket: {
       feeLabel: 'Typing fee',
       feeValue: 'Quoted before we start',
@@ -615,7 +626,7 @@ const en = {
       {
         title: 'Walk in without an appointment',
         body:
-          'Saturday to Thursday, 9:00–19:00, and Friday 9:00–19:00. Sunday closed. Single forms are usually typed while you wait; longer chains are scheduled.',
+          'Monday to Saturday, 9:00–19:00. Sunday closed. Single forms are usually typed while you wait; longer chains are scheduled.',
       },
       {
         title: 'Serving Deira and the border',
@@ -712,7 +723,7 @@ const en = {
   contact: {
     title: 'Contact Qaaf Documents Clearing Services | Hor Al Anz, Deira',
     description:
-      'Call +971 4 553 3042, WhatsApp +971 52 111 3478, or visit Shop M10, Al Habtoor Building, Abu Hail Street, Hor Al Anz, Deira, Dubai. Open Saturday to Thursday 9:00–19:00.',
+      'Call +971 4 553 3042 or WhatsApp +971 52 111 3478. Visit Shop M10, Al Habtoor Building, Abu Hail Street, Hor Al Anz, Deira. Mon–Sat 9:00–19:00; Sunday closed.',
     eyebrow: 'Contact',
     h1: 'Send the document.<br>We will tell you the rest.',
     lede:
@@ -721,6 +732,8 @@ const en = {
     formFields: {
       name: 'Your name',
       phone: 'Phone or WhatsApp number',
+      nameError: 'Enter at least 2 characters for your name.',
+      phoneError: 'Enter a phone number with at least 7 digits.',
       service: 'What do you need?',
       message: 'Details',
       messagePlaceholder:
@@ -737,8 +750,7 @@ const en = {
     ],
     hoursTitle: 'Opening hours',
     hours: [
-      ['Saturday – Thursday', '9:00 – 19:00'],
-      ['Friday', '9:00 – 19:00'],
+      ['Monday – Saturday', '9:00 – 19:00'],
       ['Sunday', 'Closed'],
     ],
     note:
@@ -816,6 +828,14 @@ const ar = {
     copied: 'تم نسخ العنوان',
     askAbout: 'اسأل عن هذه الخدمة',
     checkedCount: 'محدد',
+    posts: 'منشور',
+    viewPost: 'افتح المنشور',
+    closePost: 'إغلاق المنشور',
+    viewInstagram: 'عرض على إنستغرام',
+    serviceSearch: 'ابحث عن خدمة',
+    serviceSearchHint: 'ابحث بالخدمة أو الجهة أو المستند',
+    servicesCount: 'خدمات',
+    noServicesFound: 'لم نجد خدمة مطابقة. تواصل معنا لنرشدك إلى الخدمة المناسبة.',
     faqLede:
       'إن لم يكن سؤالك هنا، أرسله على واتساب مع نوع المستند. ستحصل على النموذج والرسوم وقائمة الأوراق في رد واحد.',
     faqMessage: 'مرحباً قاف، لدي سؤال عن مستنداتي.',
@@ -875,7 +895,10 @@ const ar = {
       'تصديق وزارة الخارجية',
       'وكالة قانونية',
     ],
-    heroCardFoot: 'السبت–الخميس ٩:٠٠–١٩:٠٠ · الجمعة ٩:٠٠–١٩:٠٠ · الأحد مغلق',
+    heroCardFoot: 'الاثنين–السبت ٩:٠٠–١٩:٠٠ · الأحد مغلق',
+    officeCardLabel: 'زر مكتبنا في ديرة',
+    officeCardTitle: 'مركز طباعة محلي، بعنوان واضح.',
+    officeCardAction: 'خطط لزيارتك',
     ticket: {
       feeLabel: 'رسوم الطباعة',
       feeValue: 'تُحدد قبل البدء',
@@ -1339,7 +1362,7 @@ const ar = {
       {
         title: 'زيارة دون موعد',
         body:
-          'السبت إلى الخميس ٩:٠٠–١٩:٠٠، والجمعة ٩:٠٠–١٩:٠٠. الأحد مغلق. النماذج البسيطة تُنجز عادة في نفس الوقت، والمعاملات الأطول تُجدول.',
+          'الاثنين إلى السبت ٩:٠٠–١٩:٠٠. الأحد مغلق. النماذج البسيطة تُنجز عادة في نفس الوقت، والمعاملات الأطول تُجدول.',
       },
       {
         title: 'نخدم ديرة والحدود',
@@ -1436,7 +1459,7 @@ const ar = {
   contact: {
     title: 'اتصل بقاف لتخليص المعاملات | هور العنز، ديرة',
     description:
-      'اتصل ‎+971 4 553 3042‎ أو واتساب ‎+971 52 111 3478‎، أو زر محل M10، مبنى الحبتور، شارع أبو هيل، هور العنز، ديرة، دبي. السبت إلى الخميس ٩:٠٠–١٩:٠٠.',
+      'اتصل ‎+971 4 553 3042‎ أو واتساب ‎+971 52 111 3478‎، أو زر محل M10، مبنى الحبتور، شارع أبو هيل، هور العنز، ديرة، دبي. من الاثنين إلى السبت ٩:٠٠–١٩:٠٠، والأحد مغلق.',
     eyebrow: 'اتصل بنا',
     h1: 'أرسل المستند.<br>ونخبرك بالباقي.',
     lede:
@@ -1445,6 +1468,8 @@ const ar = {
     formFields: {
       name: 'اسمك',
       phone: 'رقم الهاتف أو واتساب',
+      nameError: 'أدخل اسمك في حرفين على الأقل.',
+      phoneError: 'أدخل رقم هاتف يحتوي على ٧ أرقام على الأقل.',
       service: 'ما تحتاجه؟',
       message: 'التفاصيل',
       messagePlaceholder:
@@ -1461,8 +1486,7 @@ const ar = {
     ],
     hoursTitle: 'ساعات العمل',
     hours: [
-      ['السبت – الخميس', '٩:٠٠ – ١٩:٠٠'],
-      ['الجمعة', '٩:٠٠ – ١٩:٠٠'],
+      ['الاثنين – السبت', '٩:٠٠ – ١٩:٠٠'],
       ['الأحد', 'مغلق'],
     ],
     note:

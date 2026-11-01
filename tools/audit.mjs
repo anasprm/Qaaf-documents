@@ -1,9 +1,11 @@
 // Static audit for dist/: links, assets, metadata, schema, template leaks.
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, dirname, resolve } from 'node:path';
+import { site } from '../src/content.mjs';
 
 const dist = resolve(process.argv[2] || 'dist');
 const files = [];
+const documents = [];
 
 async function walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -28,6 +30,8 @@ const exists = async (p) => {
 for (const file of html) {
   const rel = file.slice(dist.length + 1).replaceAll('\\', '/');
   const src = await readFile(file, 'utf8');
+  if (!/<html\b/i.test(src)) continue;
+  documents.push(file);
   const add = (msg) => problems.push(`${rel}: ${msg}`);
 
   // template leakage
@@ -52,7 +56,10 @@ for (const file of html) {
   const desc = src.match(/<meta name="description" content="([^"]*)"/)?.[1] || '';
   if (desc.length < 60 || desc.length > 175) add(`description length ${desc.length}`);
 
-  if (!/<link rel="canonical" href="https:\/\/qaafdxb\.ae\//.test(src)) add('canonical missing');
+  const canonical = src.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+  if (!canonical?.startsWith(`https://${site.domain}/`)) {
+    add(`canonical missing or outside https://${site.domain}`);
+  }
 
   // duplicate ids
   const ids = [...src.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
@@ -108,6 +115,6 @@ const locs = (sitemap.match(/<loc>/g) || []).length;
 if (locs !== 16) problems.push(`sitemap has ${locs} urls`);
 
 console.log(report.join('\n'));
-console.log(`\npages: ${html.length}, files: ${files.length}, sitemap urls: ${locs}`);
+console.log(`\npages: ${documents.length}, files: ${files.length}, sitemap urls: ${locs}`);
 console.log(problems.length ? `\n${problems.length} problem(s):\n- ${problems.join('\n- ')}` : '\nNo problems found.');
 process.exit(problems.length ? 1 : 0);

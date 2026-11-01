@@ -48,39 +48,25 @@ ${breadcrumbs(lang, t, 'index')}
       </ul>
     </div>
 
-    <div class="hero-visual">
-      <aside class="hero-card ticket" aria-labelledby="hero-card-title">
-        <div class="ticket-top">
-          <p class="ticket-kicker" id="hero-card-title">${t.home.heroCardTitle}</p>
-          <span class="ticket-stamp" aria-hidden="true">${t.home.ticket.stamp}</span>
-        </div>
-        <ul class="ticket-list">
-          ${t.home.heroCardItems
-            .map(
-              (item, i) => `
-          <li>
-            <span class="ticket-no">0${i + 1}</span>
-            <span class="ticket-name">${item}</span>
-            <span class="ticket-dots" aria-hidden="true"></span>
-            <span class="ticket-check" aria-hidden="true">${icon('check', 'ico ico-xs')}</span>
-          </li>`,
-            )
-            .join('')}
-        </ul>
-        <div class="ticket-foot">
-          <div class="ticket-fee">
-            <span>${t.home.ticket.feeLabel}</span>
-            <strong>${t.home.ticket.feeValue}</strong>
-          </div>
-          <a class="btn btn-primary btn-sm" href="${wa(
-            lang === 'ar' ? 'مرحباً قاف، أحتاج إلى عرض سعر.' : 'Hello Qaaf, I would like a quote.',
-          )}" target="_blank" rel="noopener">${icon('whatsapp', 'ico ico-sm')}${
-            t.home.ticket.cta
-          }</a>
-        </div>
-        <p class="ticket-hours">${icon('clock', 'ico ico-sm')}${t.home.heroCardFoot}</p>
-      </aside>
-    </div>
+    <aside class="hero-visual hero-office-card" aria-labelledby="office-card-title">
+      <div class="hero-office-top">
+        <p class="hero-office-label">${icon('pin', 'ico ico-sm')}${t.home.officeCardLabel}</p>
+        <span class="open-pill" data-open-status
+          data-open="${t.ui.openNow}" data-closed="${t.ui.closedNow}"
+          data-closes="${t.ui.closesAt}" data-opens="${t.ui.opensAt}">${t.ui.hours}</span>
+      </div>
+      <h2 id="office-card-title">${t.home.officeCardTitle}</h2>
+      <p class="hero-office-description">${t.home.visitBody}</p>
+      <div class="hero-office-address">
+        <span>${t.ui.address}</span>
+        <p>${t.about.facts[6][1]}</p>
+      </div>
+      <p class="hero-office-transit">${icon('train', 'ico ico-sm')}<strong>${t.trust.metroValue}</strong><span>${t.trust.metroShort}</span></p>
+      <div class="hero-office-actions">
+        <a class="btn btn-primary" href="${site.maps}" target="_blank" rel="noopener">${icon('pin', 'ico ico-sm')}${t.ui.directions}</a>
+        <a class="btn btn-ghost" href="${href('typing-centre-deira', lang, lang)}">${t.home.officeCardAction}${icon('arrow', 'ico ico-sm')}</a>
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -96,11 +82,18 @@ ${breadcrumbs(lang, t, 'index')}
 <section class="services" id="services">
   <div class="wrap">
     ${sectionHead(t.nav.services, t.home.servicesTitle, t.home.servicesLede)}
-    <ul class="service-grid">
+    <div class="service-toolbar">
+      <label class="service-search">
+        <span>${icon('search', 'ico ico-sm')}<span>${t.ui.serviceSearch}</span></span>
+        <input id="service-search" type="search" autocomplete="off" placeholder="${escAttr(t.ui.serviceSearchHint)}" aria-controls="home-service-list" data-count-label="${escAttr(t.ui.servicesCount)}">
+      </label>
+      <p class="service-count" data-service-count aria-live="polite"></p>
+    </div>
+    <ul class="service-grid" id="home-service-list">
       ${t.services.items
         .map(
           (s, i) => `
-      <li class="service-card">
+      <li class="service-card" data-service-card>
         <span class="service-index-no">0${i + 1}</span>
         <span class="service-icon">${icon(s.icon)}</span>
         <span class="tag">${s.tag}</span>
@@ -114,6 +107,7 @@ ${breadcrumbs(lang, t, 'index')}
         )
         .join('')}
     </ul>
+    <p class="service-empty" data-service-empty role="status" hidden>${t.ui.noServicesFound} <a href="${href('contact', lang, lang)}">${t.ui.talkToUs}</a></p>
     <p class="center"><a class="btn btn-ghost" href="${href('services', lang, lang)}">${
       t.home.servicesCta
     }${icon('arrow', 'ico ico-sm')}</a></p>
@@ -533,11 +527,13 @@ ${breadcrumbs(lang, t, 'contact')}
       <h2>${t.contact.formTitle}</h2>
       <label>
         <span>${t.contact.formFields.name}</span>
-        <input type="text" name="name" autocomplete="name" required>
+        <input type="text" name="name" autocomplete="name" minlength="2" required aria-describedby="name-error" data-error="${escAttr(t.contact.formFields.nameError)}">
+        <span class="field-error" id="name-error" role="alert" hidden></span>
       </label>
       <label>
         <span>${t.contact.formFields.phone}</span>
-        <input type="tel" name="phone" autocomplete="tel" inputmode="tel" dir="ltr" required>
+        <input type="tel" name="phone" autocomplete="tel" inputmode="tel" dir="ltr" required aria-describedby="phone-error" data-error="${escAttr(t.contact.formFields.phoneError)}">
+        <span class="field-error" id="phone-error" role="alert" hidden></span>
       </label>
       <label>
         <span>${t.contact.formFields.service}</span>

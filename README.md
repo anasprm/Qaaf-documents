@@ -33,7 +33,7 @@ node tools/crawl.mjs    # every page returns 200, no broken local reference
 node tools/verify-deploy.mjs  # canonicals, hreflang, sitemap, JSON configs
 ```
 
-Both must print a clean result before publishing.
+All three checks should print a clean result before publishing.
 
 ## Deploy to Vercel (recommended)
 
@@ -42,7 +42,10 @@ Both must print a clean result before publishing.
 3. Build command `node build.mjs`, output directory `dist` (already set in `vercel.json`).
 4. Deploy, then add the domain in **Settings → Domains** and point the DNS records
    Vercel shows (apex `A 76.76.21.21`, `www` CNAME `cname.vercel-dns.com`).
-5. Set the primary domain to `qaafdxb.ae` (no `www`) so it matches the canonical tags.
+5. Keep `qaafdocuments.vercel.app` as the primary domain until `qaafdxb.ae` is pointed
+   at this deployment. The `.ae` domain currently serves a Hostinger parked page; do
+   not change `site.domain` in `src/content.mjs` until the custom domain is live, then
+   rebuild and redeploy so canonicals and the sitemap match it.
 
 `vercel.json` at the project root configures the build, asset caching, redirects and
 security headers. `dist/vercel.json` carries the same hosting rules so the folder can
@@ -82,8 +85,8 @@ Internal links are prefetched on hover/focus, and navigating inside the site use
 
 ## Confirm with the owner before launch
 
-- Opening hours (site says Sat–Thu 9:00–19:00, Fri 9:00–19:00, Sunday closed;
-  2GIS lists daily 9:00–21:00).
+- Opening hours (site says Monday–Saturday 9:00–19:00, Sunday closed; 2GIS lists
+  daily 9:00–21:00).
 - Same-day service claim.
 - Email `info@qaafdxb.ae` (the mailbox must exist on the domain).
 - Languages spoken (Arabic, English, Hindi, Urdu).

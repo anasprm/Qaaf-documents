@@ -48,6 +48,9 @@ const ICONS = {
   phone:
     '<path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1l-2.3 2.3Z"/>',
   pin: '<path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/>',
+  search: '<path d="M10.8 3a7.8 7.8 0 1 0 4.7 14l4.8 4.8 1.4-1.4-4.8-4.8a7.8 7.8 0 0 0-6.1-12.6Zm0 2a5.8 5.8 0 1 1 0 11.6 5.8 5.8 0 0 1 0-11.6Z"/>',
+  train: '<path d="M12 2c-4.4 0-7 1.4-7 4v9c0 2.1 1.7 3.8 3.8 4L7 21h2.5l1.5-2h2l1.5 2H17l-1.8-2c2.1-.2 3.8-1.9 3.8-4V6c0-2.6-2.6-4-7-4Zm0 2c3.4 0 5 .9 5 2H7c0-1.1 1.6-2 5-2Zm-5 4h10v4H7V8Zm1 6a1.2 1.2 0 1 1 0 2.4A1.2 1.2 0 0 1 8 14Zm8 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/>',
+  close: '<path d="m6.4 5 5.6 5.6L17.6 5 19 6.4l-5.6 5.6L19 17.6 17.6 19 12 13.4 6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5Z"/>',
   clock:
     '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 1.8a8.2 8.2 0 1 1 0 16.4 8.2 8.2 0 0 1 0-16.4ZM11 6v6.6l5 3 .9-1.5-4.1-2.5V6H11Z"/>',
   mail: '<path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.4L4.4 7v10.2h15.2V7L12 12.4Z"/>',
@@ -116,9 +119,8 @@ export const header = (active, lang, t) => {
       )}" target="_blank" rel="noopener" aria-label="${t.ui.whatsapp}">
         ${icon('whatsapp', 'ico ico-sm')}<span>${t.ui.whatsapp}</span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="${
-        t.nav.menu
-      }">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav"
+        aria-label="${t.nav.menu}" data-open-label="${t.nav.menu}" data-close-label="${t.nav.close}">
         <span></span><span></span>
       </button>
     </div>
@@ -286,19 +288,45 @@ const POSTERS = [
 ];
 
 export const posterGallery = (lang, t) => `
-<section class="posters-band" id="posters">
+<section class="posters-band instagram-gallery" id="posters">
   <div class="wrap">
-    ${sectionHead('', lang === 'ar' ? 'خدماتنا وإعلانات المكتب' : 'Our Services & Office Notices')}
-    <p class="lede center">${lang === 'ar'
-      ? 'تصفح ملصقات خدماتنا الرسمية والإرشادات الحكومية المتاحة في مكتبنا بهور العنز، ديرة.'
-      : 'Browse our official service posters and government guidance notices available at our Hor Al Anz office.'}</p>
-
-    <div class="poster-grid">
-      ${POSTERS.map((file, i) => `
-        <figure class="poster-item">
-          <img src="${asset(lang, `posters/${file}`)}" alt="${lang === 'ar' ? 'ملحق خدمة قاف' : 'Qaaf Service Notice'} ${i + 1}" loading="lazy">
-        </figure>`).join('')}
+    <div class="instagram-profile">
+      <img class="instagram-avatar" src="${asset(lang, 'logo-mark.png')}" alt="" width="76" height="76" loading="lazy">
+      <div class="instagram-profile-copy">
+        <div class="instagram-profile-heading">
+          <div>
+            <p class="instagram-handle">@qaafdocumentsclearing</p>
+            <h2>${lang === 'ar' ? site.nameAr : site.name}</h2>
+          </div>
+          <a class="btn btn-ghost btn-sm" href="${site.instagram}" target="_blank" rel="noopener">${t.ui.viewInstagram}${icon('instagram', 'ico ico-sm')}</a>
+        </div>
+        <p class="instagram-bio">${lang === 'ar'
+          ? 'تحديثات الخدمات ومعلومات المكتب من قاف لتخليص المعاملات في هور العنز، ديرة، دبي.'
+          : 'Service updates and office information from Qaaf Documents Clearing Services in Hor Al Anz, Deira, Dubai.'}</p>
+        <p class="instagram-post-count"><strong>${POSTERS.length}</strong> ${t.ui.posts}</p>
+      </div>
     </div>
+    <div class="instagram-grid" aria-label="${lang === 'ar' ? 'منشورات قاف' : 'Qaaf posts'}">
+      ${POSTERS.map((file, i) => `
+        <button class="instagram-post" type="button" data-post-open data-index="${i + 1}"
+          data-src="${asset(lang, `posters/${file}`)}"
+          data-alt="${lang === 'ar' ? `صورة ${i + 1} من منشورات قاف` : `Image ${i + 1} from Qaaf's posts`}"
+          aria-label="${t.ui.viewPost} ${i + 1}">
+          <img src="${asset(lang, `posters/${file}`)}" alt="" loading="lazy" decoding="async">
+          <span class="instagram-post-open" aria-hidden="true">${icon('search')}</span>
+        </button>`).join('')}
+    </div>
+    <dialog class="instagram-dialog" aria-label="${lang === 'ar' ? 'عرض المنشور' : 'Post preview'}">
+      <form method="dialog" class="instagram-dialog-bar">
+        <span>${lang === 'ar' ? site.nameAr : site.name}</span>
+        <button class="instagram-dialog-close" type="submit" aria-label="${t.nav.close}">${icon('close')}</button>
+      </form>
+      <img class="instagram-dialog-image" alt="">
+      <div class="instagram-dialog-footer">
+        <span class="instagram-dialog-count"></span>
+        <a href="${site.instagram}" target="_blank" rel="noopener">${t.ui.viewInstagram}${icon('arrow', 'ico ico-sm')}</a>
+      </div>
+    </dialog>
   </div>
 </section>
 `;
