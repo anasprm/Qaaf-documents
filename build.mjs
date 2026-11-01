@@ -1,6 +1,7 @@
 // Static site generator - no dependencies.
 //   node build.mjs     -> writes dist/
-import { mkdir, writeFile, rm, cp } from 'node:fs/promises';
+import { mkdir, writeFile, readFile, rm, cp } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { deflateSync } from 'node:zlib';
@@ -135,6 +136,12 @@ async function build() {
   await mkdir(join(dist, 'assets'), { recursive: true });
   await mkdir(join(dist, 'ar'), { recursive: true });
 
+  const assetVersionHash = createHash('sha256');
+  for (const asset of ['styles.css', 'main.js', 'fonts-en.css', 'fonts-ar.css']) {
+    assetVersionHash.update(await readFile(join(src, 'assets', asset)));
+  }
+  const assetVersion = assetVersionHash.digest('hex').slice(0, 12);
+
   const written = [];
 
   for (const lang of ['en', 'ar']) {
@@ -148,6 +155,7 @@ async function build() {
         id,
         title: meta.title,
         description: meta.description,
+        assetVersion,
         body: RENDER[id](lang, t),
         jsonLd,
       });
@@ -163,6 +171,7 @@ async function build() {
       id: 'index',
       title: t.notFound.title,
       description: t.notFound.body,
+      assetVersion,
       body: pages.notFound(lang, t),
       jsonLd: [],
       noindex: true,
@@ -462,4 +471,3 @@ function ogImage() {
 }
 
 await build();
-

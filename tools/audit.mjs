@@ -49,6 +49,8 @@ for (const file of html) {
   if (lang !== (isAr ? 'ar' : 'en')) add(`html lang is ${lang}`);
   if (dir !== (isAr ? 'rtl' : 'ltr')) add(`html dir is ${dir}`);
   if (isAr && !/[\u0600-\u06FF]/.test(src)) add('Arabic page has no Arabic text');
+  if (!/assets\/styles\.css\?v=[a-f0-9]{12}/.test(src)) add('stylesheet URL is missing its cache version');
+  if (!/assets\/main\.js\?v=[a-f0-9]{12}/.test(src)) add('script URL is missing its cache version');
 
   const title = src.match(/<title>([^<]*)<\/title>/)?.[1] || '';
   if (title.length < 15 || title.length > 75) add(`title length ${title.length}`);

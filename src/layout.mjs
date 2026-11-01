@@ -208,8 +208,20 @@ export const floatCta = (lang, t) => `
 
 /* ------------------------------------------------------------------ shell */
 
-export function document({ lang, t, id, title, description, canonical, body, jsonLd = [], noindex = false }) {
+export function document({
+  lang,
+  t,
+  id,
+  title,
+  description,
+  canonical,
+  body,
+  jsonLd = [],
+  noindex = false,
+  assetVersion,
+}) {
   const prefix = lang === 'ar' ? '../' : '';
+  const version = assetVersion ? `?v=${assetVersion}` : '';
   const siteUrl = `https://${site.domain}`;
   const pathFor = (language) => {
     const path = `${language === 'ar' ? '/ar/' : '/'}${fileFor(id)}`.replace(/index\.html$/, '');
@@ -245,7 +257,7 @@ ${lang === 'ar'
   ? `<link rel="preload" href="${prefix}assets/fonts/plex-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${prefix}assets/fonts/plex-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>`
   : `<link rel="preload" href="${prefix}assets/fonts/jakarta-latin-400-800.woff2" as="font" type="font/woff2" crossorigin>`}
-<link rel="stylesheet" href="${prefix}assets/fonts-${lang}.css">
+<link rel="stylesheet" href="${prefix}assets/fonts-${lang}.css${version}">
 <script>
   (function () {
     var root = document.documentElement;
@@ -258,7 +270,7 @@ ${lang === 'ar'
     } catch (error) {}
   })();
 </script>
-<link rel="stylesheet" href="${prefix}assets/styles.css">
+<link rel="stylesheet" href="${prefix}assets/styles.css${version}">
 ${jsonLd.map((obj) => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`).join('\n')}
 </head>
 <body class="page-${id}">
@@ -269,7 +281,7 @@ ${body}
 ${footer(lang, t)}
 ${floatCta(lang, t)}
 <div class="page-veil" aria-hidden="true"></div>
-<script src="${prefix}assets/main.js" defer></script>
+<script src="${prefix}assets/main.js${version}" defer></script>
 </body>
 </html>`;
 }

@@ -79,6 +79,8 @@ so no request ever waits on a third-party font server:
 - Plus Jakarta Sans variable (Latin) — ~27 KB, one file for every weight.
 - IBM Plex Sans Arabic 400 + 700 — loaded only on Arabic pages.
 - The main font of the current language is preloaded in `<head>`.
+- CSS and JavaScript URLs include a build-generated content version, so immutable
+  asset caching cannot leave visitors on an outdated layout or interaction.
 
 Internal links are prefetched on hover/focus, and navigating inside the site uses a
 0.24s arrival fade that never delays the navigation itself.
