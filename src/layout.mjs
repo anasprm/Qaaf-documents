@@ -251,8 +251,13 @@ ${noindex ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
-<link rel="icon" href="${prefix}assets/icon-512.png" type="image/png" sizes="512x512">
-<link rel="apple-touch-icon" href="${prefix}assets/icon-512.png">
+<link rel="icon" href="${prefix}favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="${prefix}assets/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="${prefix}assets/favicon-96.png">
+<link rel="icon" type="image/png" sizes="144x144" href="${prefix}assets/favicon-144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="${prefix}assets/favicon-192.png">
+<link rel="icon" type="image/png" sizes="384x384" href="${prefix}assets/favicon-384.png">
+<link rel="apple-touch-icon" sizes="192x192" href="${prefix}assets/favicon-192.png">
 ${lang === 'ar'
   ? `<link rel="preload" href="${prefix}assets/fonts/plex-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${prefix}assets/fonts/plex-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>`

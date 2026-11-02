@@ -187,6 +187,9 @@ async function build() {
   await cp(join(src, 'googledcae9b5bb9138e43.html'), join(dist, 'googledcae9b5bb9138e43.html'));
   await cp(join(src, 'google90d7761b632ce735.html'), join(dist, 'google90d7761b632ce735.html'));
 
+  // Root favicon.ico (crawlers look for /favicon.ico by default)
+  await cp(join(src, 'favicon.ico'), join(dist, 'favicon.ico'));
+
   // sitemap
   const urls = [];
   for (const id of PAGES) {
@@ -316,8 +319,10 @@ const MANIFEST = JSON.stringify(
     background_color: '#FFFFFF',
     theme_color: '#C8102E',
     icons: [
+      { src: '/assets/favicon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+      { src: '/assets/favicon-384.png', sizes: '384x384', type: 'image/png', purpose: 'any' },
+      { src: '/assets/favicon-96.png', sizes: '96x96', type: 'image/png', purpose: 'maskable' },
       { src: '/assets/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-      { src: '/assets/logo-mark.png', sizes: 'any', type: 'image/png' },
     ],
   },
   null,
